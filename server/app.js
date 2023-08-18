@@ -36,7 +36,7 @@ app.get('/viewers/:id', (req, res) => {
         "id": req.params.id,
         "firstName": "Dan",
         "lastName": "White",
-        "birthday": "07/01/1981",
+        "birthDate": "07/01/1981",
         "favoriteMovies": [
             "Life of Brian",
             "Holy Grail",
@@ -107,7 +107,18 @@ app.get('/info', (req, res) => {
  *          { "id": 98765432, "name": "Honey Sweet", "year": 1967, "isFavorite": false }
  */
 // Your code here
-
+app.post('/movies', (req, res) => {
+    const id = Math.floor(Math.random() * 1000000);
+    const name = req.body.name;
+    const year = Number(req.body.year);
+    const isFavorite = (req.body.favorite) ? true : false;
+    res.json({
+        "id": id,
+        "name": name,
+        "year": year,
+        "isFavorite": isFavorite
+    });
+});
 /**
  *  Advanced Bonus Phase B - Research how to return static
  *                           files in a public folder
@@ -124,6 +135,7 @@ app.get('/info', (req, res) => {
  *      Test route: /logo.png
  */
 // Your code here
+app.use(express.static('public'));
 
 // DO NOT EDIT - Set port and listener
 if (require.main === module) {
